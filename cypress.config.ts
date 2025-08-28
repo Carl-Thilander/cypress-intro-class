@@ -2,11 +2,11 @@ import { spawn } from "child_process";
 import { defineConfig } from "cypress";
 import { MongoMemoryReplSet } from "mongodb-memory-server";
 import waitOn from "wait-on";
-import { db } from "./prisma/db";
 import { seedTodos } from "./prisma/seed/todo";
 
 export default defineConfig({
   e2e: {
+    baseUrl: "http://localhost:3100",
     async setupNodeEvents(on) {
       // 1. Skapa en in-memory databas (replica set prisma gnäller annars)
       const mongo = await MongoMemoryReplSet.create({
@@ -38,9 +38,10 @@ export default defineConfig({
       process.on("exit", cleanup);
 
       // 5. Reseeda om databasen så att testerna blir oberoende av varandra
-
+      process.env.DATABASE_URL = dbUri;
       on("task", {
         async reseed() {
+          const { db } = await import("./prisma/db");
           await db.todo.deleteMany();
           await seedTodos();
 
