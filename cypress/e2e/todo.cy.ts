@@ -16,4 +16,10 @@ describe("todo", () => {
     cy.get("li").should("have.length", 2);
     cy.contains("Feed the cat").should("not.exist");
   });
+
+  it("should contain a footer with 3 links", () => {
+    cy.visit("/");
+    cy.get("[data-cy=footer]").should("exist");
+    cy.get("[data-cy=footer-links] li").should("have.length", 3);
+  });
 });
