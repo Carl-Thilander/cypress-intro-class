@@ -16,8 +16,17 @@ jobs:
       with:
         node-version: 22
         cache: 'npm'
+        cache: "npm"
+
+    - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.12.0
+        with:
+          mongodb-version: 8.0
+          mongodb-replica-set: test-rs
+        
     - run: npm ci
+
     - run: npm run build --if-present
       env: 
-       DATABASE_URL=mongodb://localhost:27017/
+       DATABASE_URL=mongodb://localhost:27017/dev
     - run: npm run test:run 
