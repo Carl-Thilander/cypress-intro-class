@@ -7,6 +7,7 @@ export default async function Home() {
   return (
     <main>
       <h1 className="text-5xl font-bold mb-4 p-4">To do List</h1>
+      <p>My lists</p>
       <TodoList defaultTodos={todos} />
     </main>
   );
