@@ -19,10 +19,10 @@ jobs:
         cache: "npm"
 
     - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.12.0
-        with:
-          mongodb-version: 8.0
-          mongodb-replica-set: test-rs
+      uses: supercharge/mongodb-github-action@1.12.0
+      with:
+        mongodb-version: 8.0
+        mongodb-replica-set: test-rs
         
     - run: npm ci
 
