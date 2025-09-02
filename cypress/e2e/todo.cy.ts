@@ -16,4 +16,10 @@ describe("todo", () => {
     cy.get("li").should("have.length", 2);
     cy.contains("Feed the cat").should("not.exist");
   });
+
+  it("should render a title", () => {
+    cy.visit("/");
+    cy.get("h1").should("contain.text", "Your todo-list for today");
+  }
+)
 });
